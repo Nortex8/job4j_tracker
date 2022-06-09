@@ -24,6 +24,7 @@ public class Error {
     public static void main(String[] args) {
         Error error = new Error(true, 100, "Congratulation!");
         error.printInfo();
+        System.out.println();
         Error er = new Error();
         er.printInfo();
     }
