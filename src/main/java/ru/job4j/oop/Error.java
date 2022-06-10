@@ -6,6 +6,9 @@ public class Error {
     private int status;
     private String message;
 
+    public Error() {
+    }
+
     public Error(boolean active, int status, String message) {
         this.active = active;
         this.status = status;
@@ -16,9 +19,6 @@ public class Error {
         System.out.println("Content of active: " + active);
         System.out.println("Amount: " + status);
         System.out.println("Sentence: " + message);
-    }
-
-    public Error() {
     }
 
     public static void main(String[] args) {
