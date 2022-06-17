@@ -12,9 +12,6 @@ public class Item {
         this.name = name;
     }
 
-    public Item() {
-    }
-
     public Item(String name) {
         this.name = name;
     }
@@ -22,6 +19,9 @@ public class Item {
     public Item(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Item() {
     }
 
     public int getId() {
