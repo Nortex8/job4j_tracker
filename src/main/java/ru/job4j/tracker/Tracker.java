@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Tracker {
     private final Item[] items = new Item[100];
-    private int ids = 1;
+    private int ids = 0;
     private int size = 0;
 
     public Item add(Item item) {
@@ -15,7 +15,7 @@ public class Tracker {
 
     public Item[] findAll() {
         Item[] rsl = new Item[items.length];
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < items.length; i++) { // for(Item item : items)
             Item item = items[i];
             if (item != null) {
                 rsl[i] = item;
@@ -40,15 +40,25 @@ public class Tracker {
         return rsl;
     }
 
-    public Item findById(int id) {
-        Item rsl = null;
+    private int indexOf(int id) {
+        int rsl = -1;
         for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId() == id) {
-                rsl = item;
+            if (items[index].getId() == id) {
+                rsl = index;
                 break;
             }
         }
         return rsl;
+    }
+
+    public Item findById(int id) {
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    public boolean replace(int id, Item item) {
+        int index = indexOf(id);
+        items[index] = item;
+        return items[index].equals(item);
     }
 }
