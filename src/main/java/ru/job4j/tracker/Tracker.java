@@ -15,7 +15,7 @@ public class Tracker {
 
     public Item[] findAll() {
         Item[] rsl = new Item[items.length];
-        for (int i = 0; i < items.length; i++) { // for(Item item : items)
+        for (int i = 0; i < items.length; i++) {
             Item item = items[i];
             if (item != null) {
                 rsl[i] = item;
