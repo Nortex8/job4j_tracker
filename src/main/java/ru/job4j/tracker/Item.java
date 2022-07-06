@@ -41,10 +41,6 @@ public class Item {
         return created;
     }
 
-    public DateTimeFormatter getFormatter() {
-        return FORMATTER;
-    }
-
     @Override
     public String toString() {
         return "Item{"
