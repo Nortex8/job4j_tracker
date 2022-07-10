@@ -4,12 +4,12 @@ public class Bus implements Transport {
 
     @Override
     public void drive() {
-
+        System.out.println("Drive with fun.");
     }
 
     @Override
     public void passenger(int number) {
-
+        System.out.println("Amount of passenger: 50.");
     }
 
     @Override
