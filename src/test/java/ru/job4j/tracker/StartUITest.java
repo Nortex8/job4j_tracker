@@ -2,9 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-import org.hamcrest.core.IsNull;
 
 public class StartUITest {
 
@@ -24,31 +23,32 @@ public class StartUITest {
 
     @Test
     public void whenReplaceItem() {
-        Input in = new StubInput(
-                new String[] {"0", "Item name", "1", "1", "Edit name", "2"}
-        );
         Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Replaced item"));
+        String replacedName = "New item name";
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(item.getId()), replacedName, "1"}
+        );
         UserAction[] actions = {
-                new CreateAction(),
                 new EditAction(),
                 new ExitAction()
         };
         new StartUI().init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Edit name"));
+        assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
 
     @Test
     public void whenDeleteItem() {
-        Input in = new StubInput(
-                new String[] {"0", "Item name", "1", "1", "2"}
-        );
         Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("Deleted item"));
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(item.getId()), "1"}
+        );
         UserAction[] actions = {
-                new CreateAction(),
                 new DeleteAction(),
                 new ExitAction()
         };
         new StartUI().init(in, tracker, actions);
-        assertNull(tracker.findById(1));
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 }
