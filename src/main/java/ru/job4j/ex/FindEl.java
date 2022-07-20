@@ -9,16 +9,17 @@ public class FindEl {
             if (Objects.equals(value[i], key)) {
                 rsl = i;
                 break;
-            } else {
-                throw new ElementNotFoundException("Совпадений не найдено");
             }
+        }
+        if (rsl == -1) {
+            throw new ElementNotFoundException("Совпадений не найдено");
         }
         return rsl;
     }
 
     public static void main(String[] args) {
         try {
-            indexOf(new String[] {"бабушка", "дедушка", "внучка"}, "брат");
+            indexOf(new String[] {"бабушка", "дедушка", "внучка"}, "внучка");
         } catch (ElementNotFoundException e) {
             e.printStackTrace();
         }
