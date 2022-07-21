@@ -5,9 +5,9 @@ import java.util.Objects;
 public class UserStore {
 
     public static User findUser(User[] users, String login) throws UserNotFoundException {
-        for (int i = 0; i < users.length; i++) {
-            if (String.valueOf(users[i]).equals(login)) {
-                return users[i];
+        for (User user : users) {
+            if (user.getUsername().equals(login)) {
+                return user;
             } else {
                     throw new UserNotFoundException("User is not found.");
                 }
@@ -16,20 +16,28 @@ public class UserStore {
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-        return true;
+        if (user.isValid() && user.getUsername().length() > 3) {
+                return true;
+        } else {
+            throw new UserInvalidException("User is not valid.");
+        }
     }
 
     public static void main(String[] args) {
         try {
             User[] users = {
-                    new User("Petr", true)
+                    new User("Petr Arsentev", true)
             };
-            User user = findUser(users, "Petr");
+            User user = findUser(users, "Petr Arsentev");
             if (validate(user)) {
                 System.out.println("This user has an access");
             }
-        } catch (UserNotFoundException e) {
-            e.printStackTrace();
+        } catch (UserInvalidException e) {
+            System.out.println("User is not valid.");
+        } catch (UserNotFoundException en) {
+            System.out.println("User is not found.");
+        } catch (Exception ea) {
+            ea.printStackTrace();
         }
     }
 }
