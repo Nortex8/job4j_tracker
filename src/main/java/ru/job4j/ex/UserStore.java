@@ -8,19 +8,16 @@ public class UserStore {
         for (User user : users) {
             if (user.getUsername().equals(login)) {
                 return user;
-            } else {
-                    throw new UserNotFoundException("User is not found.");
-                }
+            }
         }
-        return null;
+        throw new UserNotFoundException("User is not found.");
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-        if (user.isValid() && user.getUsername().length() > 3) {
-                return true;
-        } else {
+        if (!user.isValid() || user.getUsername().length() < 4) {
             throw new UserInvalidException("User is not valid.");
         }
+        return true;
     }
 
     public static void main(String[] args) {
