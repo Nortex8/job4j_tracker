@@ -5,10 +5,17 @@ import java.util.Arrays;
 public class SingleTracker {
     private static SingleTracker someTracker = null;
 
+    private Tracker tracker = new Tracker();
+
     private SingleTracker() {
     }
 
-    private Tracker tracker = new Tracker();
+    public static SingleTracker getSomeTracker() {
+        if (someTracker == null) {
+            someTracker = new SingleTracker();
+        }
+        return someTracker;
+    }
 
     public Item add(Item item) {
         return tracker.add(item);
